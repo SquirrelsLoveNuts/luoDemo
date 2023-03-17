@@ -13,8 +13,8 @@ import java.util.List;
 public class HelloController {
     @Autowired
     UserService userService;
-
     @ResponseBody
+
     @RequestMapping("/send")
     public String send() {
         List<User> user = userService.getList();
