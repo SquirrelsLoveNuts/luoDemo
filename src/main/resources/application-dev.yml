@@ -3,15 +3,22 @@ spring:
   main:
     allow-circular-references: true
   datasource:
-    url: jdbc:mysql://localhost:3306/test?useUnicode=true&characterEncoding=utf8&useSSL=false
-    username: root
+    url: jdbc:mysql://124.70.195.98:3306/luo_dev?useUnicode=true&characterEncoding=utf8&useSSL=false
+    username: luo_dev
     password: root
     driver-class-name: com.mysql.jdbc.Driver
+  mvc:
+    view:
+      prefix: /templates/
+      suffix: .html
 mybatis:
-  mapper-locations: classpath:mapper/*.xml
+  # mybatis日志配置
   configuration:
-    ## 日志
+    cache-enabled: true
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  # mybatis映射文件位置配置，即当我们需要写较复杂的sql语句时需要在resouces目录下的xxMapper.xml中进行，这个配置就是指定其位置
+
+  mapper-locations: classpath*:mapper/*.xml
 
 pagehelper:
   #指定数据库的方言
@@ -25,3 +32,6 @@ pagehelper:
   #为了支持startPage(Object params)方法，增加了该参数来配置参数映射，用于从对象中根据属性名取值
   params: =count=countSql
 
+logging:
+  pattern:
+    console: '%X{RequestNo}-%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36}[%L] - %msg%n'

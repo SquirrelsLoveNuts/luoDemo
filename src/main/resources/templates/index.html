@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <link rel="stylesheet" type="text/css" href="css/style.css">
+        <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+        <script>
+            $(document).ready(function() {
+                $("button").click(function() {
+                    var account = $("#account").val();
+                    var password = $("#password").val();
+                    if (account.replace(/\s*/g,"") === ""){
+                        alert("用户名不能为空！");
+                        return;
+                    }
+                    if (password.replace(/\s*/g,"") === ""){
+                        alert("密码不能为空！");
+                        return;
+                    }
+
+                    $.ajax({
+                        type : 'post',
+                        url : '/login/check/up?',
+                        dataType : 'json',
+                        data : {
+                            account: account,
+                            password: password
+                        },
+                        success: function (data) {
+                            if (data.success) {
+                                window.location.href = "/login";
+                            } else {
+                                alert(data.msg);
+                            }
+                        }
+                    });
+                });
+            });
+        </script>
+    </head>
+    <body>
+        <div class="content">
+            <div class="login-wrapper">
+                <div class="left-img">
+                    <div class="glass">
+                        <div class="tips">
+                            <div class="title">
+                                THE SPACE NETWORK
+                            </div>
+                            <h1>Explore The Universe</h1>
+                            <span>5 Million+ people have joined our network.</span>
+                            <span>we invite you to join the tribe</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="right-login-form">
+                    <div class="form-wrapper">
+                        <h1>Log in</h1>
+                        <form id="form-login" role="form">
+                            <div class="input-items">
+                            <span class="input-tips">
+                                Email Address
+                            </span>
+                                <input type="text" id="account" class="inputs" placeholder="Enter your email">
+                            </div>
+                            <div class="input-items">
+                            <span class="input-tips">
+                                Password
+                            </span>
+                                <input type="password" id="password" class="inputs" placeholder="Enter password">
+                                <span class="forgot">Forgot Password</span>
+                            </div>
+                            <button class="btn" id="login" type="button" >Log in</button>
+                            <div class="siginup-tips">
+                                <span>Don't Have An Account?<a href="#">Signup</a></span>
+                            </div>
+                        </form>
+                        <div class="other-login">
+                            <div class="divider">
+                                <span class="line"></span>
+                                <span class="divider-text">or</span>
+                                <span class="line"></span>
+                            </div>
+                            <div class="other-login-wrapper">
+                                <div class="other-login-item">
+                                    <img src="/images/QQ.png" alt="QQ">
+                                </div>
+                                <div class="other-login-item">
+                                    <img src="/images/WeChat.png" alt="WeChat">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
